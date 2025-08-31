@@ -1,0 +1,23 @@
+{
+  "name": "makemytrip-tourism-api",
+  "version": "1.0.0",
+  "description": "MakeMyTrip Tourism API Testing Simulation using Postman and JSON Server (April 2025)",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch db.json --port 3001",
+    "test:api": "newman run postman/collection.json -e postman/environment.local.json"
+  },
+  "keywords": [
+    "api",
+    "json-server",
+    "postman",
+    "tourism",
+    "testing"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "devDependencies": {
+    "json-server": "^0.17.3",
+    "newman": "^6.1.2"
+  }
+}

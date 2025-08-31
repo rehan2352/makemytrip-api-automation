@@ -1,0 +1,83 @@
+{
+  "info": {
+    "name": "MakeMyTrip Tourism API - April 2025",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Packages",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/packages",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "packages"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+  "if (typeof data === 'undefined') { var data; }",
+  "try {",
+  "    data = pm.response.json();",
+  "} catch(e) {",
+  "    data = [];",
+  "}",
+  "",
+  "pm.test('1. Status Code Validation', () => pm.response.to.have.status(200));",
+  "pm.test('2. Response Time Validation', () => pm.expect(pm.response.responseTime).to.be.below(1000));",
+  "pm.test('3. Data Type Validation', () => data.forEach(p => { pm.expect(p.duration_days).to.be.a('number'); pm.expect(p.price_per_person).to.be.a('number'); pm.expect(p.rating).to.be.a('number'); }));",
+  "pm.test('4. Mandatory Field Validation', () => data.forEach(p => { pm.expect(p).to.have.property('package_id'); pm.expect(p).to.have.property('destination'); pm.expect(p).to.have.property('price_per_person'); }));",
+  "pm.test('5. Unique ID Validation', () => { const ids = data.map(p=>p.package_id); pm.expect(ids.length).to.eql([...new Set(ids)].length); });",
+  "pm.test('6. Array Content Validation', () => data.forEach(p => { pm.expect(p.available_dates.length).to.be.above(0); pm.expect(p.inclusions.length).to.be.above(0); }));",
+  "pm.test('7. Range Validation - Rating between 0 and 5', () => data.forEach(p => pm.expect(p.rating).to.be.within(0,5)));",
+  "pm.test('8. Availability Status Validation', () => data.forEach(p => pm.expect(['Available','Sold Out']).to.include(p.availability_status)));",
+  "pm.test('9. Logical Price Validation', () => data.forEach(p => pm.expect(p.price_per_person).to.be.above(0)));",
+  "pm.test('10. Destination Name Validation', () => data.forEach(p => pm.expect(p.destination).to.not.be.empty));",
+  "pm.test('11. Duration Validation', () => data.forEach(p => pm.expect(p.duration_days).to.be.above(0)));",
+  "pm.test('12. Inclusions Type Validation', () => data.forEach(p => pm.expect(p.inclusions).to.be.an('array')));",
+  "pm.test('13. Dates Format Validation', () => data.forEach(p => p.available_dates.forEach(d => pm.expect(d).to.match(/^\\d{4}-\\d{2}-\\d{2}$/))));"
+],
+
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get Invalid Package",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/packages/99999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "packages",
+            "99999"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('14. Error Response Validation - 404', () => pm.response.to.have.status(404));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ]
+}

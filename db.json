@@ -1,0 +1,58 @@
+{
+  "packages": [
+    {
+      "package_id": 101,
+      "destination": "Goa",
+      "duration_days": 5,
+      "price_per_person": 12000,
+      "rating": 4.5,
+      "availability_status": "Available",
+      "available_dates": [
+        "2025-05-01",
+        "2025-05-15"
+      ],
+      "inclusions": [
+        "Hotel",
+        "Breakfast",
+        "Sightseeing"
+      ],
+      "theme": "Beach"
+    },
+    {
+      "package_id": 102,
+      "destination": "Manali",
+      "duration_days": 7,
+      "price_per_person": 15000,
+      "rating": 4.7,
+      "availability_status": "Sold Out",
+      "available_dates": [
+        "2025-06-10",
+        "2025-06-20"
+      ],
+      "inclusions": [
+        "Hotel",
+        "Dinner",
+        "Trekking"
+      ],
+      "theme": "Hill"
+    },
+    {
+      "package_id": 103,
+      "destination": "Kerala",
+      "duration_days": 6,
+      "price_per_person": 18000,
+      "rating": 4.8,
+      "availability_status": "Available",
+      "available_dates": [
+        "2025-07-05",
+        "2025-07-15"
+      ],
+      "inclusions": [
+        "Houseboat",
+        "Meals",
+        "Backwater Tour"
+      ],
+      "theme": "Nature"
+    }
+  ]
+}
